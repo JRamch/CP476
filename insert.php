@@ -1,4 +1,9 @@
+
 <?php
+
+//THIS FILE DOES NOT NEED TO BE CALLED FOR OUR PROJECT! 
+//IT'S ONLY FOR POPULATING YOUR MYSQL DATABASE!
+
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 try {
     //change 'root' and 'Admin' to your mysql username / password
