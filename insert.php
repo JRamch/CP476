@@ -81,6 +81,9 @@ try{
     exit("\nerror opening Supplier.txt");
 }
 
+$inv = $conn->prepare("INSERT INTO inventory select proProductID, proProductName, proQuantity, proPrice, proStatus, S.supSupplierName FROM product INNER JOIN supplier S ON proSupplierID = supSupplierID");
+$inv->execute();
+
 $conn->close();
 echo "\nsuccess!";
 ?>
