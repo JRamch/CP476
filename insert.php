@@ -14,13 +14,25 @@ try {
 
 try{
     $file = fopen("Product.txt", 'r');
-    $test = fgetcsv($file, 1000, ',','"',"");
-    for ($i = 0; $i < count($test); $i++){
-        echo $test[$i];
+    //$test = fgetcsv($file, 1000, ',','"',"");
+
+    $insert = $conn->prepare("INSERT IGNORE INTO product (proProductID, proProductName, proDescription, proPrice, proQuantity, proStatus, proSupplierID) VALUES (?,?,?,?,?,?,?)");
+    $insert->bind_param("isidss", $ID, $proName, $quantity, $price, $status, $supName);
+
+    while (($data = fgetcsv($file, 1000, ',','"',"")) !== FALSE){
+        //echo $test[$i];
+        $ID = $data[0];
+        $proName = $data[1];
+        $quantity = $data[2];
+        $price = $data[3];
+        $status = $data[4];
+        $supName = $data[5];
+        echo $ID; $proName; $quantity; $price; $status; $supName;
     }
     fclose($file);
 } catch(Exception $e){
-    exit("error opening Product.txt");
+    echo $e;
+    exit("\nerror opening Product.txt");
 }
 
 $conn->close();
