@@ -16,23 +16,64 @@ try{
     $file = fopen("Product.txt", 'r');
     //$test = fgetcsv($file, 1000, ',','"',"");
 
-    $insert = $conn->prepare("INSERT IGNORE INTO product (proProductID, proProductName, proDescription, proPrice, proQuantity, proStatus, proSupplierID) VALUES (?,?,?,?,?,?,?)");
-    $insert->bind_param("isidss", $ID, $proName, $quantity, $price, $status, $supName);
+    $insert = $conn->prepare("INSERT INTO product (proProductID, proProductName, proDescription, proPrice, proQuantity, proStatus, proSupplierID) VALUES (?,?,?,?,?,?,?)");
+    $insert->bind_param("issdisi", $proID, $proName, $desc, $price, $quant, $status, $supID);
 
-    while (($data = fgetcsv($file, 1000, ',','"',"")) !== FALSE){
+    while (($data = fgetcsv($file, 1000, ',','"',"")) != FALSE){
         //echo $test[$i];
-        $ID = $data[0];
+        $proID = $data[0];
         $proName = $data[1];
-        $quantity = $data[2];
+        $desc = $data[2];
         $price = $data[3];
-        $status = $data[4];
-        $supName = $data[5];
-        echo $ID; $proName; $quantity; $price; $status; $supName;
+        $quant = $data[4];
+        $status = $data[5];
+        $supID = $data[6];
+        /*
+        echo $ID; 
+        echo $proName; 
+        echo $desc; 
+        echo $price; 
+        echo $quant; 
+        echo $status; 
+        echo $supID;
+        */
+        $insert->execute();
     }
     fclose($file);
 } catch(Exception $e){
     echo $e;
     exit("\nerror opening Product.txt");
+}
+
+try{
+    $file = fopen("Supplier.txt", 'r');
+    //$test = fgetcsv($file, 1000, ',','"',"");
+
+    $insertSup = $conn->prepare("INSERT INTO supplier (supSupplierID, supSupplierName, supAddress, supPhone, supEmail) VALUES (?,?,?,?,?)");
+    $insertSup->bind_param("issss", $supSupID, $supName, $address, $phone, $email);
+
+    while (($data = fgetcsv($file, 1000, ',','"',"")) != FALSE){
+        //echo $test[$i];
+        $supSupID = $data[0];
+        $supName = $data[1];
+        $address = $data[2];
+        $phone = $data[3];
+        $email = $data[4];
+        /*
+        echo $ID; 
+        echo $proName; 
+        echo $desc; 
+        echo $price; 
+        echo $quant; 
+        echo $status; 
+        echo $supID;
+        */
+        $insertSup->execute();
+    }
+    fclose($file);
+} catch(Exception $e){
+    echo $e;
+    exit("\nerror opening Supplier.txt");
 }
 
 $conn->close();
