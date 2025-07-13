@@ -1,13 +1,12 @@
--- Create the main database
+--creating the main database
 CREATE DATABASE IF NOT EXISTS InventoryDB;
 USE InventoryDB;
 
--- Drop tables if they already exist (for clean re-runs)
+-- drop tables for clean re-runs
 DROP TABLE IF EXISTS inventory;
 DROP TABLE IF EXISTS product;
 DROP TABLE IF EXISTS supplier;
-
--- Create the supplier table
+--self explaining
 CREATE TABLE supplier (
     supSupplierID INT PRIMARY KEY,
     supSupplierName VARCHAR(50) NOT NULL,
@@ -16,7 +15,6 @@ CREATE TABLE supplier (
     supEmail VARCHAR(100)
 );
 
--- Create the product table
 CREATE TABLE product (
     proProductID INT PRIMARY KEY,
     proProductName VARCHAR(50),
@@ -28,7 +26,6 @@ CREATE TABLE product (
     FOREIGN KEY (proSupplierID) REFERENCES supplier(supSupplierID)
 );
 
--- Create the inventory table (denormalized view-style)
 CREATE TABLE inventory (
     invProductID INT PRIMARY KEY,
     invProductName VARCHAR(50),
