@@ -9,8 +9,8 @@ DROP TABLE IF EXISTS supplier;
 
 -- Create the supplier table
 CREATE TABLE supplier (
-    supSupplierID INT PRIMARY KEY,
-    supSupplierName VARCHAR(50) NOT NULL,
+    supSupplierID INT NOT NULL,
+    supSupplierName VARCHAR(50),
     supAddress VARCHAR(100),
     supPhone VARCHAR(20),
     supEmail VARCHAR(100)
@@ -18,21 +18,20 @@ CREATE TABLE supplier (
 
 -- Create the product table
 CREATE TABLE product (
-    proProductID INT PRIMARY KEY,
+    proProductID INT NOT NULL,
     proProductName VARCHAR(50),
     proDescription VARCHAR(50),
     proPrice DECIMAL(10,2),
     proQuantity INT,
-    proStatus CHAR(1),
-    proSupplierID INT,
-    FOREIGN KEY (proSupplierID) REFERENCES supplier(supSupplierID)
+    proStatus VARCHAR(10),
+    proSupplierID INT
 );
 
 -- Create the inventory table (denormalized view-style)
 CREATE TABLE inventory (
-    invProductID INT PRIMARY KEY,
+    invProductID INT NOT NULL,
     invProductName VARCHAR(50),
     invPrice DECIMAL(10,2),
-    invStatus CHAR(1),
+    invStatus VARCHAR(10),
     invSupplierName VARCHAR(50)
 );
