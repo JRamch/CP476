@@ -21,7 +21,7 @@ try{
     $file = fopen("Product.txt", 'r');
     //$test = fgetcsv($file, 1000, ',','"',"");
 
-    $insert = $conn->prepare("INSERT INTO product (proProductID, proProductName, proDescription, proPrice, proQuantity, proStatus, proSupplierID) VALUES (?,?,?,?,?,?,?)");
+    $insert = $conn->prepare("INSERT IGNORE INTO product (proProductID, proProductName, proDescription, proPrice, proQuantity, proStatus, proSupplierID) VALUES (?,?,?,?,?,?,?)");
     $insert->bind_param("issdisi", $proID, $proName, $desc, $price, $quant, $status, $supID);
 
     while (($data = fgetcsv($file, 1000, ',','"',"")) != FALSE){
@@ -54,7 +54,7 @@ try{
     $file = fopen("Supplier.txt", 'r');
     //$test = fgetcsv($file, 1000, ',','"',"");
 
-    $insertSup = $conn->prepare("INSERT INTO supplier (supSupplierID, supSupplierName, supAddress, supPhone, supEmail) VALUES (?,?,?,?,?)");
+    $insertSup = $conn->prepare("INSERT IGNORE INTO supplier (supSupplierID, supSupplierName, supAddress, supPhone, supEmail) VALUES (?,?,?,?,?)");
     $insertSup->bind_param("issss", $supSupID, $supName, $address, $phone, $email);
 
     while (($data = fgetcsv($file, 1000, ',','"',"")) != FALSE){
@@ -81,7 +81,7 @@ try{
     exit("\nerror opening Supplier.txt");
 }
 
-$inv = $conn->prepare("INSERT INTO inventory select proProductID, proProductName, proQuantity, proPrice, proStatus, S.supSupplierName FROM product INNER JOIN supplier S ON proSupplierID = supSupplierID");
+$inv = $conn->prepare("INSERT IGNORE INTO inventory select proProductID, proProductName, proQuantity, proPrice, proStatus, S.supSupplierName FROM product INNER JOIN supplier S ON proSupplierID = supSupplierID");
 $inv->execute();
 
 $conn->close();

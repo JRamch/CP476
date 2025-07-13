@@ -1,4 +1,6 @@
 <?php
+//session_start();
+//$_SESSION['login'] = FALSE;
 $valid_name = "test";
 $valid_email = "test";
 

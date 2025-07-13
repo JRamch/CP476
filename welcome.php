@@ -32,10 +32,16 @@ $_SESSION['delete'] = "";
 $_SESSION['col'] = "";
 $_SESSION['value'] = "";
 $_SESSION['search'] = "SELECT * FROM inventory";
+$_SESSION['login'] = TRUE;
+$_SESSION['delKey'] = "";
+$_SESSION['upQuant'] = "";
+$_SESSION['upPrice'] = "";
+$_SESSION['upStatus'] = "";
+$_SESSION['upID'] = "";
+$_SESSION['upSup'] = "";
 header("Location:main.php");
+exit;
 //echo "Welcome, " . htmlspecialchars($name) . "!";
-
-
 
 function test_input($data) {
   $data = trim($data);
@@ -45,4 +51,4 @@ function test_input($data) {
   return $data;
 }
 
-
+?>
