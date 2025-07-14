@@ -1,4 +1,4 @@
---creating the main database
+-- creating the main database
 CREATE DATABASE IF NOT EXISTS InventoryDB;
 USE InventoryDB;
 
@@ -6,7 +6,7 @@ USE InventoryDB;
 DROP TABLE IF EXISTS inventory;
 DROP TABLE IF EXISTS product;
 DROP TABLE IF EXISTS supplier;
---self explaining
+-- self explaining
 CREATE TABLE supplier (
     supSupplierID INT NOT NULL,
     supSupplierName VARCHAR(50),
